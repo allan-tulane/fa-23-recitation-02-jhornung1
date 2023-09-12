@@ -1,12 +1,16 @@
 from main import *
 
 def test_simple_work():
-	""" done. """
-	assert work_calc(10, 2, 2) == #TODO
-	assert work_calc(20, 3, 2) == #TODO
-	assert work_calc(30, 4, 2) == #TODO
+
+  assert simple_work_calc(10, 2, 2) == 36
+  assert simple_work_calc(20, 3, 2) == 230
+  assert simple_work_calc(30, 4, 2) == 650
+
+  assert simple_work_calc(40, 2, 2) == 224
+  assert simple_work_calc(50, 3, 2) == 881
+  assert simple_work_calc(60, 4, 2) == 2660
 
 def test_work():
-	assert work_calc(10, 2, 2,lambda n: 1) == #TODO
-	assert work_calc(20, 1, 2, lambda n: n*n) == #TODO
-	assert work_calc(30, 3, 2, lambda n: n) == #TODO
+  assert work_calc(10, 2, 2,lambda n: 1) == 1
+  assert work_calc(20, 1, 2, lambda n: n*n) == 1
+  assert work_calc(30, 3, 2, lambda n: n) == 1
