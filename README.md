@@ -40,7 +40,7 @@ where $W(1) = 1$.
 
 - [ ] 4. (2 point) Now, derive the asymptotic behavior of $W(n)$ using $f(n) = 1$, $f(n) = \log n$ and $f(n) = n$. Then, generate actual values for $W(n)$ for your code and confirm that the trends match your derivations.
 
-**TODO: For $f(n) = 1$ and $f(n) = n$, the asymptomatic notation for $W(n)$ is O(n). For $f(\log_n)$ the asymptomatic notation for $W(n)$ is O($n * \log_n$)**
+**TODO: For $f(n) = 1$, the asymptomatic notation for $W(n)$ is O($n \log_n$), because the output when n = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100] is; [5, 6, 6, 7, 7, 7, 8, 8, 8, 8]. For $f(n) = n$, the asymptomatic notation for $W(n)$ is O(n) which is linear. This is becuase the out is [18, 38, 56, 78, 97, 116, 137, 158, 176, 197]. For $f(\log_n)$ the asymptomatic notation for $W(n)$ is also O($n * \log_n$) because the output is [4.60, 7.60, 9.15, 11.28, 12.50, 13.24, 14.79, 15.67, 16.09, 17.11].**
 
 - [ ] 5. (4 points) Now that you have a nice way to empirically generate valuess of $W(n)$, we can look at the relationship between $a$, $b$, and $f(n)$. Suppose that $f(n) = n^c$. What is the asypmptotic behavior of $W(n)$ if $c < \log_b a$? What about $c > \log_b a$? And if they are equal? Modify `test_compare_work` to compare empirical values for different work functions (at several different values of $n$) to justify your answer. 
 

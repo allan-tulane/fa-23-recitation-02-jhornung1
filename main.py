@@ -14,14 +14,12 @@ def simple_work_calc(n, a, b):
   return (a * simple_work_calc(n // b, a ,b) + n)
 
 def work_calc(n, a, b, f):
-  if n <= 1:
-    return f(n)
-
-  total_work = f(n)
-  for spot in range(a):
-    total_work += work_calc(n // b, a, b, f)
-  print(total_work)
-  return total_work
+    result = 0
+    while n > 1:
+        result += f(n)  # Add f(n) at each step
+        n //= b
+    result += a * f(n)  # Add the final term a * f(n) when n becomes 1
+    return result
 
 def span_calc(n, a, b, f):
   """Compute the span associated with the recurrence $W(n) = aW(n/b) + f(n)
@@ -100,18 +98,15 @@ def test_compare_span():
   pass
 
 # Decide value for work calc
-n = 32
 a = 2
 b = 2
 
 # Define the function being used
-f = lambda f: 1
-
-
-# Calling work_calc
-print(work_calc(n, a, b, f))
+def f(n):
+    return math.log(n)
 
 # Multiple values for n
-#nums = [10,20,30,40,50,60,70,80,90,100]
-#for val in nums:
-#  print(work_calc(val, a, b, f))
+nums = [10,20,30,40,50,60,70,80,90,100]
+for val in nums:
+  print(work_calc(val, a, b, f))
+
