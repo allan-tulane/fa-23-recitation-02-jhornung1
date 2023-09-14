@@ -22,21 +22,13 @@ def work_calc(n, a, b, f):
     return result
 
 def span_calc(n, a, b, f):
-  """Compute the span associated with the recurrence $W(n) = aW(n/b) + f(n)
-
-	Params:
-	n......input integer
-	a......branching factor of recursion tree
-	b......input split factor
-	f......a function that takes an integer and returns 
-           the work done at each node 
-
-	Returns: the value of W(n).
-	"""
-  # TODO
-  pass
-
-
+  if n <= 1:
+    return 0  # Base case, no span
+  else:
+    return max(
+      span_calc(n / b, a, b, f),  # Recursive span
+      work_calc(n / b, a, b, f) / a  # Work per processor
+    )
 
 def compare_work(work_fn1, work_fn2, sizes=[10, 20, 50, 100, 1000, 5000, 10000]):
   """
@@ -84,29 +76,65 @@ def print_results(results):
               tablefmt="github"))
 
 def test_compare_work():
-  # curry work_calc to create multiple work
-  # functions that can be passed to compare_work
-  def work_fn1():
-    return 1 * 1
-  def work_fn2():
-    return 1 + 1 + 1
+  sizes = [10, 100, 1000, 10000]
+  a_values = [2, 3]
+  b_values = [2, 3]
+  c_values = [1, 2, 3]
 
-  return compare_work(work_fn1, work_fn2)
+  for a in a_values:
+    for b in b_values:
+      for c in c_values:
+        print(f"a = {a}, b = {b}, c = {c}:")
+                
+        # Define a custom work function based on the recurrence relation
+        def custom_work_function(n):
+          return work_calc(n, a, b, lambda x: x**c)
+                
+        # Compare the custom work function with a reference function
+        reference_function = lambda n: n  # For example, linear function
+                
+        comparison_result = compare_work(custom_work_function, reference_function, sizes)
+                
+        # Print the comparison result
+        for item in comparison_result:
+          n, custom_v, reference_v = item
+          print(f"W({n}) (Custom): {custom_v}, W({n}) (Reference): {reference_v}")
+                
+      print()
 
 def test_compare_span():
-  # TODO
-  pass
+  sizes = [10, 100, 1000, 10000]
+  a_values = [2, 3]
+  b_values = [2, 3]
+  c_values = [1, 2, 3]
 
-# Decide value for work calc
-a = 2
-b = 2
+  for a in a_values:
+    for b in b_values:
+      for c in c_values:
+        print(f"a = {a}, b = {b}, c = {c}:")
+        for n in sizes:
+          # Define the custom work function based on the recurrence relation
+          def custom_work_function(x):
+            return work_calc(x, a, b, lambda x: x**c)
+                    
+          # Calculate the span using the custom work function
+          span_result = span_calc(n, a, b, lambda x: x**c)
+          print(f"Span({n}) = {span_result}")
+        print()
 
-# Define the function being used
-def f(n):
+def test_work_calc_question_3():
+  # Decide value for work calc
+  a = 2
+  b = 2
+
+  # Define the function being used
+  def f(n):
     return math.log(n)
 
-# Multiple values for n
-nums = [10,20,30,40,50,60,70,80,90,100]
-for val in nums:
-  print(work_calc(val, a, b, f))
+  # Multiple values for n
+  nums = [10,20,30,40,50,60,70,80,90,100]
+  for val in nums:
+    print(work_calc(val, a, b, f))
 
+
+test_compare_span()
